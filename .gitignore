@@ -13,7 +13,7 @@
 ###< symfony/web-server-bundle ###
 
 /.idea
-
+**/.DS_STORE
 ###> symfony/phpunit-bridge ###
 .phpunit
 /phpunit.xml
