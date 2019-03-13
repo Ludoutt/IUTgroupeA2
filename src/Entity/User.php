@@ -37,9 +37,9 @@ class User
     private $password;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string", length=255)
      */
-    private $roles = [];
+    private $role;
 
     public function getId(): ?int
     {
@@ -94,14 +94,14 @@ class User
         return $this;
     }
 
-    public function getRoles(): ?array
+    public function getRole(): ?string
     {
-        return $this->roles;
+        return $this->role;
     }
 
-    public function setRoles(array $roles): self
+    public function setRole(string $role): self
     {
-        $this->roles = $roles;
+        $this->role = $role;
 
         return $this;
     }
