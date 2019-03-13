@@ -51,6 +51,11 @@ class Element
      */
     private $acceptationCriteria;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $state;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +141,18 @@ class Element
     public function setAcceptationCriteria(string $acceptationCriteria): self
     {
         $this->acceptationCriteria = $acceptationCriteria;
+
+        return $this;
+    }
+
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    public function setState(?string $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }
