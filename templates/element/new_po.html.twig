@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Element{% endblock %}
+
+{% block body %}
+    <h1>Créer nouveau Element</h1>
+
+    {{ include('element/_form_po.html.twig') }}
+
+    <a href="{{ path('element_index') }}">back to list</a>
+{% endblock %}
