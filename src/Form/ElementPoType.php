@@ -7,11 +7,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ElementType extends AbstractType
+class ElementPoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -29,9 +29,9 @@ class ElementType extends AbstractType
                 'Done'=>'done',
                 'En attente'=>'attente'
             )))
-            ->add('position',NumberType::class, array('label'=>'Ordonnencement de l\'élément'))
-            ->add('complexity',NumberType::class, array('label'=>'Points de complexité'))
-            ->add('nbHours',NumberType::class, array('label'=>'Points de complexité'))
+            ->add('position',IntegerType::class, array('label'=>'Ordonnencement de l\'élément'))
+            ->add('complexity',IntegerType::class, array('label'=>'Points de complexité'))
+            ->add('nbHours',IntegerType::class, array('label'=>'Nombre d\'heures estimé'))
             ->add('acceptationCriteria', TextareaType::class, array('label'=>'Critères d\'acceptations'))
         ;
     }

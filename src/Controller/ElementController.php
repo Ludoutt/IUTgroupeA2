@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Element;
-use App\Form\ElementType;
+use App\Form\ElementPoType;
 use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,12 +26,12 @@ class ElementController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="element_new", methods={"GET","POST"})
+     * @Route("/po/new", name="element_po_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $element = new Element();
-        $form = $this->createForm(ElementType::class, $element);
+        $form = $this->createForm(ElementPoType::class, $element);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,28 +42,17 @@ class ElementController extends AbstractController
             return $this->redirectToRoute('element_index');
         }
 
-        return $this->render('element/new.html.twig', [
+        return $this->render('element/new_po.html.twig', [
             'element' => $element,
             'form' => $form->createView(),
         ]);
     }
-
     /**
-     * @Route("/{id}", name="element_show", methods={"GET"})
-     */
-    public function show(Element $element): Response
-    {
-        return $this->render('element/show.html.twig', [
-            'element' => $element,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="element_edit", methods={"GET","POST"})
+     * @Route("/po/{id}/edit", name="element_po_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Element $element): Response
     {
-        $form = $this->createForm(ElementType::class, $element);
+        $form = $this->createForm(ElementPoType::class, $element);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -74,7 +63,7 @@ class ElementController extends AbstractController
             ]);
         }
 
-        return $this->render('element/edit.html.twig', [
+        return $this->render('element/edit_po.html.twig', [
             'element' => $element,
             'form' => $form->createView(),
         ]);

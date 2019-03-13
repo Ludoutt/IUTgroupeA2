@@ -33,8 +33,7 @@
                 <td>{{ element.acceptationCriteria }}</td>
                 <td>{{ element.state }}</td>
                 <td>
-                    <a href="{{ path('element_show', {'id': element.id}) }}">show</a>
-                    <a href="{{ path('element_edit', {'id': element.id}) }}">edit</a>
+                    <a href="{{ path('element_po_edit', {'id': element.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -45,5 +44,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('element_new') }}">Create new</a>
+    <a href="{{ path('element_po_new') }}">Create new</a>
 {% endblock %}
