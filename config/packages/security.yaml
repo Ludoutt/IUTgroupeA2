@@ -8,6 +8,9 @@ security:
             security: false
         main:
             anonymous: true
+        role_hierarchy:
+            ROLE_PRODUCT_OWNER: [ROLE_ADMIN, ROLE_DEV]
+            ROLE_DEV: ROLE_USER
 
             # activate different ways to authenticate
 
