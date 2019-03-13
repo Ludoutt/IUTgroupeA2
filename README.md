@@ -7,4 +7,4 @@ Lancer serveur Symfony :
 - Entrer "php bin/console server:run" dans la console
 
 **REMARQUES :**
-- Créer un fichier .env.local pour créer la bdd (ça sera pas commit du coup moins relou, contrairement au .env normal).
+- Créer un fichier .env.local pour créer la bdd (ça sera pas commit du coup moins relou, contrairement au .env normal, reprendre la ligne du .env).
