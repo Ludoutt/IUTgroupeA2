@@ -46,6 +46,11 @@ class Element
      */
     private $nbHours;
 
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $acceptationCriteria;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +124,18 @@ class Element
     public function setNbHours(int $nbHours): self
     {
         $this->nbHours = $nbHours;
+
+        return $this;
+    }
+
+    public function getAcceptationCriteria(): ?string
+    {
+        return $this->acceptationCriteria;
+    }
+
+    public function setAcceptationCriteria(string $acceptationCriteria): self
+    {
+        $this->acceptationCriteria = $acceptationCriteria;
 
         return $this;
     }
