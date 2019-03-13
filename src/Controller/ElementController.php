@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Element;
 use App\Form\ElementPoType;
+use App\Form\ElementDevNewType;
 use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -47,6 +48,31 @@ class ElementController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/dev/new", name="element_dev_new", methods={"GET","POST"})
+     */
+    public function newDev(Request $request): Response
+    {
+        $element = new Element();
+        $form = $this->createForm(ElementDevNewType::class, $element);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $element->setState('attente');
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($element);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('element_index');
+        }
+
+        return $this->render('element/new_dev.html.twig', [
+            'element' => $element,
+            'form' => $form->createView(),
+        ]);
+    }
+
     /**
      * @Route("/po/{id}/edit", name="element_po_edit", methods={"GET","POST"})
      */
