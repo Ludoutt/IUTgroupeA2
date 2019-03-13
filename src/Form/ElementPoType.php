@@ -23,15 +23,13 @@ class ElementPoType extends AbstractType
                 'Correction'=>'correction',
                 'Users Stories'=>'userstory'
             )))
-            ->add('state',ChoiceType::class, array('label'=>'Type de l\'élément', 'choices'=>array(
+            ->add('state',ChoiceType::class, array('label'=>'Etat de l\'élément', 'choices'=>array(
                 'To Do'=>'todo',
                 'Doing'=>'doing',
                 'Done'=>'done',
                 'En attente'=>'attente'
             )))
             ->add('position',IntegerType::class, array('label'=>'Ordonnencement de l\'élément'))
-            ->add('complexity',IntegerType::class, array('label'=>'Points de complexité'))
-            ->add('nbHours',IntegerType::class, array('label'=>'Nombre d\'heures estimé'))
             ->add('acceptationCriteria', TextareaType::class, array('label'=>'Critères d\'acceptations'))
         ;
     }
