@@ -21,7 +21,7 @@ class UserType extends AbstractType implements FormTypeInterface
             ->add('lastname')
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
-            ->add('roles', ChoiceType::class, [
+            ->add('role', ChoiceType::class, [
                 'choices' => [
                     'Product Owner' => 'ROLE_PRODUCT_OWNER',
                     'Developer' => 'ROLE_DEV'

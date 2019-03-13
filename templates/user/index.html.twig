@@ -12,7 +12,6 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Roles</th>
                 <th>actions</th>
             </tr>
@@ -24,8 +23,7 @@
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                <td>{{ user.role }}</td>
                 <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>

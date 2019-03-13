@@ -24,12 +24,8 @@
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                <th>Role</th>
+                <td>{{ user.role == 'ROLE_PRODUCT_OWNER' ? 'Product Owner' : 'Developer' }}</td>
             </tr>
         </tbody>
     </table>
