@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+{{ form_label(form.firstname) }}&nbsp;{{ form_widget(form.firstname) }} <br>
+    {{ form_label(form.lastname) }}&nbsp;{{ form_widget(form.lastname) }} <br>
+    {{ form_label(form.email) }}&nbsp;{{ form_widget(form.email) }} <br>
+    {{ form_label(form.password) }}&nbsp;{{ form_widget(form.password) }} <br>
+    {{ form_label(form.role) }}&nbsp;{{ form_widget(form.role) }} <br>
+<button class="btn">{{ button_label|default('Sauvegarder') }}</button>
+{{ form_end(form) }}
