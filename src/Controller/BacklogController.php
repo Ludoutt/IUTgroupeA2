@@ -82,12 +82,15 @@ class BacklogController extends AbstractController
             ['position' => 'DESC']
         );
 
+        $user = $this->getUser();
+
         return $this->render('backlog/backlog.html.twig', array(
             'elements_attente' => $elements_attente,
             'elements_todo' => $elements_todo,
             'elements_doing' => $elements_doing,
             'elements_done' => $elements_done,
-            'elements_annule' => $elements_annule
+            'elements_annule' => $elements_annule,
+            'user' => $user
         ));
     }
 }
