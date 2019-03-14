@@ -8,11 +8,13 @@
                 <a href="{{ path('user_new') }}" class="btn btn-perso btn-outline-perso my-2 my-sm-0 mr-3" type="submit">Ajouter
                     un utilisateur
                 </a>
-                {{ user.lastname }}Dupont Dupont - DEV
-            {% elseif is_granted('ROLE_DEV') %}
+	    {% endif %}
+            {% if app.user %}
                 <span class="text-white">{{ user.firstname }} {{ user.lastname }} - {{ user.role }}</span>
+                <a href="{{ path('logout') }}" class="btn btn-perso btn-outline-perso my-2 my-sm-0 mr-3" type="submit">Déconnexion
+                </a>
             {% else %}
-                <a href="{{ path('app_login') }}" class="btn btn-perso btn-outline-perso my-2 my-sm-0 mr-3" type="submit">Connexion
+	     	<a href="{{ path('app_login') }}" class="btn btn-perso btn-outline-perso my-2 my-sm-0 mr-3" type="submit">Connexion
                 </a>
             {% endif %}
         </div>
