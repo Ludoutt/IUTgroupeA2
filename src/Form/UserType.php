@@ -12,16 +12,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType implements FormTypeInterface
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname')
-            ->add('lastname')
-            ->add('email', EmailType::class)
-            ->add('password', PasswordType::class)
+            ->add('firstname', null, array('label' => 'Prénom ') )
+            ->add('lastname', null, array('label' => 'Nom '))
+            ->add('email', EmailType::class, array('label' => 'Adresse mail '))
+            ->add('password', PasswordType::class, array('label' => 'Mot de passe '))
             ->add('role', ChoiceType::class, [
+                'label' => 'Rôle ',
                 'choices' => [
                     'Product Owner' => 'ROLE_PRODUCT_OWNER',
                     'Developer' => 'ROLE_DEV'
