@@ -41,7 +41,7 @@ class ElementController extends AbstractController
             $entityManager->persist($element);
             $entityManager->flush();
 
-            return $this->redirectToRoute('element_index');
+            return $this->redirectToRoute('backlog');
         }
 
         return $this->render('element/new_po.html.twig', [
@@ -65,7 +65,7 @@ class ElementController extends AbstractController
             $entityManager->persist($element);
             $entityManager->flush();
 
-            return $this->redirectToRoute('element_index');
+            return $this->redirectToRoute('backlog');
         }
 
         return $this->render('element/new_dev.html.twig', [
@@ -85,7 +85,7 @@ class ElementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('element_index', [
+            return $this->redirectToRoute('backlog', [
                 'id' => $element->getId(),
             ]);
         }
@@ -107,7 +107,7 @@ class ElementController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('element_index', [
+            return $this->redirectToRoute('backlog', [
                 'id' => $element->getId(),
             ]);
         }

@@ -46,6 +46,8 @@
                             {% for attente in elements_attente %}
                                 <div id="popoverOption{{ attente.id }}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ attente.title }}" data-content="{{ attente.description }}">
                                     {{ attente.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ attente.complexity }}{% if attente.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ attente.nbHours }}{% if attente.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': attente.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -75,6 +77,8 @@
                                 {% if todo.type == 'feature' %}
                                 <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-success" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
                                     {{ todo.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ todo.complexity }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ todo.nbHours }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -86,6 +90,8 @@
                                 {% elseif todo.type == 'correction' %}
                                 <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-danger" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
                                     {{ todo.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ todo.complexity }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ todo.nbHours }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -97,6 +103,8 @@
                                 {% elseif todo.type == 'userstory' %}
                                 <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-primary" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
                                     {{ todo.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ todo.complexity }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ todo.nbHours }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -108,6 +116,8 @@
                                 {% else %}
                                 <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-warning" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
                                     {{ todo.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ todo.complexity }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ todo.nbHours }}{% if todo.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -138,6 +148,8 @@
                                 {% if doing.type == 'feature' %}
                                 <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-success" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
                                     {{ doing.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ doing.complexity }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ doing.nbHours }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -149,6 +161,8 @@
                                 {% elseif doing.type == 'correction' %}
                                 <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-danger" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
                                     {{ doing.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ doing.complexity }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ doing.nbHours }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -160,6 +174,8 @@
                                 {% elseif doing.type == 'userstory' %}
                                 <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-primary" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
                                     {{ doing.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ doing.complexity }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ doing.nbHours }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -171,6 +187,8 @@
                                 {% else %}
                                 <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-warning" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
                                     {{ doing.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ doing.complexity }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ doing.nbHours }}{% if doing.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -201,6 +219,8 @@
                                 {% if done.type == 'feature' %}
                                 <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-success" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
                                     {{ done.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ done.complexity }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ done.nbHours }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -212,6 +232,8 @@
                                 {% elseif done.type == 'correction' %}
                                 <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-danger" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
                                     {{ done.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ done.complexity }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ done.nbHours }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -223,6 +245,8 @@
                                 {% elseif done.type == 'userstory' %}
                                 <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-primary" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
                                     {{ done.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ done.complexity }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ done.nbHours }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -234,6 +258,8 @@
                                 {% else %}
                                 <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-warning" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
                                     {{ done.title }}
+                                    <br/><span class="text-muted">Points de complexité : {{ done.complexity }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
+                                    <br/><span class="text-muted">Estimation horaire : {{ done.nbHours }}{% if done.complexity is same as(null) %}A définir{% endif %}</span>
                                     <div class="float-right col-sm-4">
                                         {% if is_granted('ROLE_PRODUCT OWNER') %}
                                             <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
@@ -265,6 +291,8 @@
                         {% for annule in elements_annule %}
                             <div id="popoverOption{{ annule.id }}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ annule.title }}" data-content="{{ annule.description }}">
                                 {{ annule.title }}
+                                <br/><span class="text-muted">Points de complexité : {{ annule.complexity }}{% if annule.complexity is same as(null) %}A définir{% endif %}</span>
+                                <br/><span class="text-muted">Estimation horaire : {{ annule.nbHours }}{% if annule.complexity is same as(null) %}A définir{% endif %}</span>
                                 <div class="col-sm-4 float-right">
                                     {% if is_granted('ROLE_PRODUCT OWNER') %}
                                         <a href="{{ path('element_po_edit', {'id': annule.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
