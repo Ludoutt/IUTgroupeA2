@@ -27,7 +27,8 @@ class ElementPoType extends AbstractType
                 'To Do'=>'todo',
                 'Doing'=>'doing',
                 'Done'=>'done',
-                'En attente'=>'attente'
+                'En attente'=>'attente',
+                'Annulé'=>'annule'
             )))
             ->add('position',IntegerType::class, array('label'=>'Ordonnencement de l\'élément'))
             ->add('acceptationCriteria', TextareaType::class, array('label'=>'Critères d\'acceptations'))
