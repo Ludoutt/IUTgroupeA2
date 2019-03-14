@@ -82,12 +82,6 @@ class BacklogController extends AbstractController
             ['position' => 'DESC']
         );
 
-        dump($elements_attente);
-        dump($elements_todo);
-        dump($elements_doing);
-        dump($elements_done);
-        dump($elements_annule);
-
         return $this->render('backlog/backlog.html.twig', array(
             'elements_attente' => $elements_attente,
             'elements_todo' => $elements_todo,
