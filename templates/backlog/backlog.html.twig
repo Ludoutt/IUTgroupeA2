@@ -1,0 +1,281 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #4267b2;">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            {% if is_granted('ROLE_PRODUCT OWNER') %}
+                <a href="{{ path('user_new') }}" class="btn btn-perso btn-outline-perso my-2 my-sm-0 mr-3" type="submit">Ajouter
+                    un utilisateur
+                </a>
+                {{ user.lastname }}Dupont Dupont - DEV
+            {% elseif is_granted('ROLE_DEV') %}
+                <span class="text-white">{{ user.firstname }} {{ user.lastname }} - {{ user.role }}</span>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="btn btn-perso btn-outline-perso my-2 my-sm-0 mr-3" type="submit">Connexion
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container-fluid p-4">
+        {% if is_granted('ROLE_PRODUCT OWNER') %}
+            <a href="{{ path('element_po_new') }}" type="button" class="btn btn-perso btn-outline-perso mb-4">Ajouter un
+                élément
+                <i class="fas fa-plus"></i>
+            </a>
+        {% elseif is_granted('ROLE_DEV') %}
+            <a href="{{ path('element_dev_new') }}" type="button" class="btn btn-perso btn-outline-perso mb-4">Ajouter
+                un élément
+                <i class="fas fa-plus"></i>
+            </a>
+        {% endif %}
+        <button type="button" class="btn btn-primary mb-4">User Story</button>
+        <button type="button" class="btn btn-success mb-4">Features</button>
+        <button type="button" class="btn btn-danger mb-4">Corrections</button>
+        <div class="card-group">
+            <div class="card">
+                <div class="card-header text-center">EN ATTENTE</div>
+                <div class="card-body">
+                    {% if elements_attente|length > 0 %}
+                        <div class="list-group">
+                            {% for attente in elements_attente %}
+                                <div id="popoverOption{{ attente.id }}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ attente.title }}" data-content="{{ attente.description }}">
+                                    {{ attente.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': attente.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': attente.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <script>
+									jQuery(document).ready(function ($) {
+										$('#popoverOption{{ attente.id }}').popover({trigger: "hover"});
+									});
+                                </script>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Il n'y a pas d'éléments en attente de validation</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header card-perso text-center">TODO</div>
+                <div class="card-body">
+                    {% if elements_todo|length > 0 %}
+                        <div class="list-group">
+                            {% for todo in elements_todo %}
+                                {% if todo.type == 'feature' %}
+                                <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-success" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
+                                    {{ todo.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% elseif todo.type == 'correction' %}
+                                <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-danger" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
+                                    {{ todo.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% elseif todo.type == 'userstory' %}
+                                <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-primary" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
+                                    {{ todo.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div id="popoverOption{{ todo.id }}" class="list-group-item list-group-item-action list-group-item-warning" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ todo.title }}" data-content="{{ todo.description }}">
+                                    {{ todo.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': todo.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <script>
+									jQuery(document).ready(function ($) {
+										$('#popoverOption{{ todo.id }}').popover({trigger: "hover"});
+									});
+                                </script>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Il n'y a pas d'éléments en TODO</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header card-perso text-center">DOING</div>
+                <div class="card-body">
+                    {% if elements_doing|length > 0 %}
+                        <div class="list-group">
+                            {% for doing in elements_doing %}
+                                {% if doing.type == 'feature' %}
+                                <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-success" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
+                                    {{ doing.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% elseif doing.type == 'correction' %}
+                                <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-danger" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
+                                    {{ doing.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% elseif doing.type == 'userstory' %}
+                                <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-primary" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
+                                    {{ doing.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div id="popoverOption{{ doing.id }}" class="list-group-item list-group-item-action list-group-item-warning" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ doing.title }}" data-content="{{ doing.description }}">
+                                    {{ doing.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': doing.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <script>
+									jQuery(document).ready(function ($) {
+										$('#popoverOption{{ doing.id }}').popover({trigger: "hover"});
+									});
+                                </script>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Il n'y a pas d'éléments en DOING</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header card-perso text-center">DONE</div>
+                <div class="card-body">
+                    {% if elements_done|length > 0 %}
+                        <div class="list-group">
+                            {% for done in elements_done %}
+                                {% if done.type == 'feature' %}
+                                <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-success" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
+                                    {{ done.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% elseif done.type == 'correction' %}
+                                <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-danger" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
+                                    {{ done.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% elseif done.type == 'userstory' %}
+                                <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-primary" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
+                                    {{ done.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% else %}
+                                <div id="popoverOption{{ done.id }}" class="list-group-item list-group-item-action list-group-item-warning" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ done.title }}" data-content="{{ done.description }}">
+                                    {{ done.title }}
+                                    <div class="float-right col-sm-4">
+                                        {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                            <a href="{{ path('element_po_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% elseif is_granted('ROLE_DEV') %}
+                                            <a href="{{ path('element_dev_edit', {'id': done.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <script>
+									jQuery(document).ready(function ($) {
+										$('#popoverOption{{ done.id }}').popover({trigger: "hover"});
+									});
+                                </script>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>Il n'y a pas d'éléments en DONE</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-5">
+            <div class="card-header text-center">ANNULÉES</div>
+            <div class="card-body">
+                {% if elements_annule|length > 0 %}
+                    <div class="list-group">
+                        {% for annule in elements_annule %}
+                            <div id="popoverOption{{ annule.id }}" class="list-group-item list-group-item-action list-group-item-dark" data-toggle="popover" data-placement="top" data-trigger="hover" title="{{ annule.title }}" data-content="{{ annule.description }}">
+                                {{ annule.title }}
+                                <div class="col-sm-4 float-right">
+                                    {% if is_granted('ROLE_PRODUCT OWNER') %}
+                                        <a href="{{ path('element_po_edit', {'id': annule.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                    {% elseif is_granted('ROLE_DEV') %}
+                                        <a href="{{ path('element_dev_edit', {'id': annule.id }) }}" class="btn btn-edit float-right"><i class="fas fa-edit"></i></a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p>Il n'y a pas d'éléments en ANNULÉES</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

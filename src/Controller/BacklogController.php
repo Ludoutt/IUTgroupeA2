@@ -6,13 +6,14 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
 
 class BacklogController extends AbstractController
 {
     /**
      * @Route("/", name="backlog")
      */
-    public function backlog(ElementRepository $elementRepository)
+    public function backlog(ElementRepository $elementRepository, UserRepository $userRepository)
     {
         $elements_attente = $elementRepository->findBy(
             ['state' => 'attente'],
@@ -39,18 +40,15 @@ class BacklogController extends AbstractController
             ['position' => 'ASC']
         );
 
-        dump($elements_attente);
-        dump($elements_todo);
-        dump($elements_doing);
-        dump($elements_done);
-        dump($elements_annule);
+		$user = $this->getUser();
 
         return $this->render('backlog/backlog.html.twig', array(
             'elements_attente' => $elements_attente,
             'elements_todo' => $elements_todo,
             'elements_doing' => $elements_doing,
             'elements_done' => $elements_done,
-            'elements_annule' => $elements_annule
+            'elements_annule' => $elements_annule,
+			'user' => $user
         ));
     }
 
