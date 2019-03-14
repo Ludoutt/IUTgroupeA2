@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Element;
 use App\Form\ElementPoType;
 use App\Form\ElementDevNewType;
+use App\Form\ElementDevEditType;
 use App\Repository\ElementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -90,6 +91,28 @@ class ElementController extends AbstractController
         }
 
         return $this->render('element/edit_po.html.twig', [
+            'element' => $element,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/dev/{id}/edit", name="element_dev_edit", methods={"GET","POST"})
+     */
+    public function editDev(Request $request, Element $element): Response
+    {
+        $form = $this->createForm(ElementDevEditType::class, $element);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('element_index', [
+                'id' => $element->getId(),
+            ]);
+        }
+
+        return $this->render('element/edit_dev.html.twig', [
             'element' => $element,
             'form' => $form->createView(),
         ]);
