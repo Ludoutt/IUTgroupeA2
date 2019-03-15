@@ -3,7 +3,7 @@ Espace pour le TP du groupe A2
 
 ## Comment installer le projet ?
 
-- Lancer dans le terminal la commande `git clone https://github.com/Ludoutt/IUTgroupeA2`
+- Lancer dans le terminal la commande `git clone https://github.com/Ludoutt/IUTgroupeA2.git`
 - Se rendre dans le dossier créé
 - Lancer dand le terminal la commande `composer install`
 - Créer un fichier .env.local (basé sur le .env) afin de spécifier le chemin vers la base de données
